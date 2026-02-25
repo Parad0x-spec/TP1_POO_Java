@@ -18,10 +18,11 @@ public class Spiritueux extends Produit {
      * @param nomProduit Nom de la bouteille.
      * @param prix Tarif unitaire.
      * @param mentions Mentions légales.
+     * @param quantiteStock Nombre de bouteilles en stock.
      */
 
-    public Spiritueux(String type, String domaine, String nomProduit, float prix, MentionLegal mentions) {
+    public Spiritueux(String type, String domaine, String nomProduit, float prix, MentionLegal mentions, int quantiteStock) {
         //On donne les données au parent
-        super(type, domaine, nomProduit, prix, mentions);
+        super(type, domaine, nomProduit, prix, mentions,  quantiteStock);
     }
 }

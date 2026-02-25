@@ -11,6 +11,7 @@ public abstract class Produit { // force la class a donner la logique
     private String nomProduit;
     private float prix;
     private MentionLegal mentions;
+    private int quantiteStock;
 
     /**
      * Constructeur de la classe Produit.
@@ -19,14 +20,16 @@ public abstract class Produit { // force la class a donner la logique
      * @param nomProduit Nom commercial.
      * @param prix Prix de vente.
      * @param mentions Détails légaux (alcool, description).
+     * @param quantiteStock pour suivre en temps réel le stock pour les alertes.
      */
 
-    public Produit(String type,String domaine,String nomProduit, float prix, MentionLegal mentions) {
+    public Produit(String type,String domaine,String nomProduit, float prix, MentionLegal mentions, int quantiteStock) {
         this.type = type;
         this.domaine = domaine;
         this.nomProduit = nomProduit;
         this.prix = prix;
         this.mentions = mentions;
+        this.quantiteStock = quantiteStock;
     }
 
     /**
@@ -81,5 +84,28 @@ public abstract class Produit { // force la class a donner la logique
     // À ajouter dans Produit.java
     public void setPrix(float nouveauPrix) {
         this.prix = nouveauPrix;
+    }
+
+    /**
+     * Récupère la quantité actuellement disponible.
+     * @return le nombre de bouteilles en stock.
+     */
+
+    public int getQuantiteStock() { return quantiteStock; }
+
+    /**
+     * Met à jour manuellement le stock.
+     * @param quantiteStock la nouvelle quantité.
+     */
+
+    public void setQuantiteStock(int quantiteStock) { this.quantiteStock = quantiteStock; }
+
+    /**
+     * Retire des bouteilles du stock lors d'une vente.
+     * @param qte La quantité à soustraire.
+     */
+
+    public void retirerStock(int qte) {
+        this.quantiteStock -= qte;
     }
 }

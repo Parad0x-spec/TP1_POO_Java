@@ -138,8 +138,20 @@ graph TD
     style Resize fill:#bbdefb,stroke:#1976d2
     style Insert fill:#c8e6c9,stroke:#2e7d32
 ````
-
-5. Architecture global
+5. Ajout pour le TP2
+```mermaid
+graph TD
+    Start([Début]) --> Input["Scanner : Saisir les infos du Produit"]
+    Input --> Capacity{Reste-t-il une place 'null' ?}
+    Capacity -- "Non (Plein)" --> Resize["Appeler 'agrandirStock'"]
+    Resize --> NewArray["Créer tableau plus grand + Copier anciens produits"]
+    NewArray --> Add
+    Capacity -- "Oui (Libre)" --> Add["Chercher le premier index 'null'"]
+    Add --> Insert["Placer le 'nouveauProduit' à cet index"]
+    Insert --> Success[/Afficher 'Produit ajouté au catalogue'/]
+    Success --> End([Fin])
+```
+6. Architecture global
 
 ````mermaid
 graph LR

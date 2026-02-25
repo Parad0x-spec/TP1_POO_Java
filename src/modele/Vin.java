@@ -16,10 +16,11 @@ public class Vin extends Produit {
      * @param prix Prix unitaire.
      * @param mentions Mentions légales associées.
      * @param couleur Couleur du vin (Rouge, Blanc, Rosé).
+     * @param quantiteStock Le stock initial de bouteilles de vin.
      */
 
-    public Vin(String type, String domaine, String nomproduit, float prix, MentionLegal mentions, String couleur) {
-        super(type, domaine, nomproduit, prix, mentions);
+    public Vin(String type, String domaine, String nomproduit, float prix, MentionLegal mentions, String couleur, int quantiteStock) {
+        super(type, domaine, nomproduit, prix, mentions, quantiteStock);
         this.couleur = couleur;
     }
 
