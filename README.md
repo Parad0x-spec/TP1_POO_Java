@@ -14,7 +14,7 @@ Ce projet est une application Java permettant de gérer un inventaire de bouteil
 
 1. Exercice 1
 
-````mermaid
+```mermaid
 graph TD
     %% 1. Initialisation
     Start([Début]) --> A["Initialiser 'listeProduits' (vide)"]
