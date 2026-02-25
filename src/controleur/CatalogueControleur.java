@@ -30,20 +30,51 @@ public class CatalogueControleur {
      */
 
     public Produit[] initialiserStock() { //C'est un tableau de produit qui prend les enfant en compte
-        Produit[] stock = new Produit[3];
+        Produit[] stock = new Produit[50];
+
+        // Les Vin
+        stock[0] = new Vin("Vin", "Château Margaux", "Premier Grand Cru", 450.00f,
+                new MentionLegal(13.5f, "Contient des sulfites - Mis en bouteille au château"), "Rouge", 2);
+        stock[1] = new Vin("Vin", "Domaine de la Palme", "Cuvée de table", 8.50f,
+                new MentionLegal(12.0f, "Vin de France - Mis en bouteille à la propriété"), "Rouge", 150);
+        stock[2] = new Vin("Vin", "Mouton Cadet", "Baron Philippe", 12.90f,
+                new MentionLegal(13.0f, "AOC Bordeaux - Élevé en fûts de chêne"), "Rouge", 45);
+        stock[3] = new Vin("Vin", "Veuve Clicquot", "Carte Jaune", 45.00f,
+                new MentionLegal(12.5f, "Champagne - Appellation d'Origine Contrôlée"), "Blanc", 24);
+        stock[4] = new Vin("Vin", "Château d'Yquem", "Sauternes", 320.00f,
+                new MentionLegal(14.0f, "Contient des sulfites - Vin de garde"), "Blanc", 1);
+        stock[5] = new Vin("Vin", "Miraval", "Côtes de Provence", 18.50f,
+                new MentionLegal(13.0f, "AOP Côtes de Provence - Produit de France"), "Rosé", 60);
+        stock[6] = new Vin("Vin", "Minuty", "Prestige", 16.00f,
+                new MentionLegal(12.5f, "Cru Classé - Provence"), "Rosé", 80);
+        stock[7] = new Vin("Vin", "Pétrus", "Pomerol 2018", 3200.00f,
+                new MentionLegal(14.5f, "Grand Vin de Bordeaux - Rare"), "Rouge", 1);
+        stock[8] = new Vin("Vin", "Cloudy Bay", "Sauvignon Blanc", 29.00f,
+                new MentionLegal(13.5f, "Produit de Nouvelle-Zélande - Marlborough"), "Blanc", 12);
+        stock[9] = new Vin("Vin", "Gevrey-Chambertin", "Pinot Noir", 55.00f,
+                new MentionLegal(13.0f, "Bourgogne - Vieilles Vignes"), "Rouge", 8);
 
         // Les Spiritueux
-
-        stock[0] = new Spiritueux("Cognac","Domaine des Remparts", "XO", 207.3f,
-        new MentionLegal(40.0f, "Grande Champagne"));
-
-        // Ajout d'un Vin
-        stock[1] = new Vin("Vin", "Château Margaux", "Grand Cru", 450.0f,
-                new MentionLegal(13.5f, "Notes de fruits rouges"), "Rouge");
-
-        // Ajout d'un autre Spiritueux
-        stock[2] = new Spiritueux("Armagnac", "Domaine de Laberdolive", "1995", 150.0f,
-                new MentionLegal(42.0f, "Millésimé"));
+        stock[10] = new Spiritueux("Spiritueux", "Ricard", "Pastis de Marseille", 19.90f,
+                new MentionLegal(45.0f, "Anisé - Alcool de plantes"), 100);
+        stock[11] = new Spiritueux("Spiritueux", "Jack Daniels", "Old No.7", 24.50f,
+                new MentionLegal(40.0f, "Tennessee Whiskey - Filtré sur charbon"), 40);
+        stock[12] = new Spiritueux("Spiritueux", "Hibiki", "Japanese Harmony", 95.00f,
+                new MentionLegal(43.0f, "Blended Whisky - Produit du Japon"), 3);
+        stock[13] = new Spiritueux("Spiritueux", "Grey Goose", "L'Original", 38.00f,
+                new MentionLegal(40.0f, "Vodka de blé - Distillée en France"), 15);
+        stock[14] = new Spiritueux("Spiritueux", "Hendrick's", "Small Batch", 34.00f,
+                new MentionLegal(44.0f, "Gin infusé au concombre et à la rose"), 20);
+        stock[15] = new Spiritueux("Spiritueux", "Diplomatico", "Reserva Exclusiva", 42.00f,
+                new MentionLegal(40.0f, "Rhum de tradition espagnole - Venezuela"), 25);
+        stock[16] = new Spiritueux("Spiritueux", "Hennessy", "V.S.O.P", 65.00f,
+                new MentionLegal(40.0f, "Cognac - Appellation Cognac Contrôlée"), 5);
+        stock[17] = new Spiritueux("Spiritueux", "Patron", "Silver", 48.00f,
+                new MentionLegal(40.0f, "100% Agave - Tequila Premium"), 10);
+        stock[18] = new Spiritueux("Spiritueux", "Baileys", "Original", 15.50f,
+                new MentionLegal(17.0f, "Crème de whisky - Contient des produits laitiers"), 50);
+        stock[19] = new Spiritueux("Spiritueux", "Macallan", "12 Years", 85.00f,
+                new MentionLegal(40.0f, "Single Malt Scotch Whisky - Highland"), 4);
 
         return stock;
     }
@@ -64,14 +95,16 @@ public class CatalogueControleur {
             return null;
 
         for (Produit p : stock) {
-            // On compare le domaine du produit actuel avec la recherche
-            if (p.getDomaine().equalsIgnoreCase(domaineRecherche)) { // test .equalsIgnoreCase ne fonctionne pas et la normalisation
-                // n'est pas de mon niveau donc je ne l'ai pas ajouter
-                return p; // On a trouvé le produit, on stop la recherche ici
+            if (p != null) {
+                // On compare le domaine du produit actuel avec la recherche
+                if (p.getDomaine().equalsIgnoreCase(domaineRecherche)) { // test .equalsIgnoreCase ne fonctionne pas et la normalisation
+                    // n'est pas de mon niveau donc je ne l'ai pas ajouter
+                    return p; // On a trouvé le produit, on stop la recherche ici
+                }
             }
         }
         return null; // Si on arrive ici, c'est qu'on n'a rien trouvé
-        }
+    }
 
     /**
      * Modifie le prix d'un produit si il existe.
@@ -106,7 +139,7 @@ public class CatalogueControleur {
             if (p == null) return stock;
         }
         // Sinon, on double la taille
-        Produit[] nouveauStock = new Produit[stock.length + 2];
+        Produit[] nouveauStock = new Produit[stock.length + 10];
 
         for (int i = 0; i < stock.length; i++){
             nouveauStock[i] = stock[i];
@@ -161,5 +194,30 @@ public class CatalogueControleur {
                 return;
             }
         }
+    }
+
+    /**
+     * Vérifie si la quantité demandée est disponible et gère les alertes.
+     * @param p Le produit sélectionné.
+     * @param qteDemandee La quantité que le client veut acheter.
+     * @return true si la vente est possible, false sinon.
+     */
+    public boolean verifierDisponibilite(Produit p, int qteDemandee) {
+        if (p.getQuantiteStock() == 0) {
+            System.out.println("ERREUR : Rupture de stock pour ce produit !");
+            return false;
+        }
+
+        if (qteDemandee > p.getQuantiteStock()) {
+            System.out.println("ERREUR : Stock insuffisant (Disponible : " + p.getQuantiteStock() + ")");
+            return false;
+        }
+
+        // Alerte stock bas (seuil fixé à 3 bouteilles)
+        if (p.getQuantiteStock() - qteDemandee <= 3) {
+            System.out.println(" ALERTE : Le stock devient très bas après cette vente !");
+        }
+
+        return true;
     }
 }

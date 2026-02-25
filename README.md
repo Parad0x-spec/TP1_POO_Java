@@ -44,10 +44,10 @@ graph TD
     %% Couleurs pour différencier les étapes
     style Loop fill:#f9f,stroke:#333
     style Choice fill:#b3e5fc,stroke:#01579b
-````
+```
 2. Exercice 2
 
-````mermaid
+```mermaid
 graph TD
     %% 1. Initialisation
     Start([Début]) --> A["Scanner : Lire 'termeRecherche'"]
@@ -79,11 +79,11 @@ graph TD
     style Match fill:#fff9c4,stroke:#fbc02d
     style Found fill:#c8e6c9,stroke:#2e7d32
     style Error fill:#ffcdd2,stroke:#c62828
-````
+```
 
 3. Exercice 3
 
-````mermaid
+```mermaid
 graph TD
     %% 1. Initialisation
     Start([Début]) --> A["Scanner : Lire 'domaineASupprimer'"]
@@ -108,11 +108,11 @@ graph TD
     style Match fill:#fff9c4,stroke:#fbc02d
     style Nullify fill:#ffcdd2,stroke:#c62828
     style Confirm fill:#c8e6c9,stroke:#2e7d32
-````
+```
 
 4. Exercice 4
 
-````mermaid
+```mermaid
 graph TD
     %% 1. Initialisation
     Start([Début]) --> Input["Scanner : Saisir les infos du Produit (Type, Nom, Prix...)"]
@@ -137,11 +137,25 @@ graph TD
     style Capacity fill:#fff9c4,stroke:#fbc02d
     style Resize fill:#bbdefb,stroke:#1976d2
     style Insert fill:#c8e6c9,stroke:#2e7d32
-````
+```
 
-5. Architecture global
+5. Ajout pour le TP2
 
-````mermaid
+```mermaid
+graph TD
+    Start([Début]) --> Input["Scanner : Saisir les infos du Produit"]
+    Input --> Capacity{Reste-t-il une place 'null' ?}
+    Capacity -- "Non (Plein)" --> Resize["Appeler 'agrandirStock'"]
+    Resize --> NewArray["Créer tableau plus grand + Copier anciens produits"]
+    NewArray --> Add
+    Capacity -- "Oui (Libre)" --> Add["Chercher le premier index 'null'"]
+    Add --> Insert["Placer le 'nouveauProduit' à cet index"]
+    Insert --> Success[/Afficher 'Produit ajouté au catalogue'/]
+    Success --> End([Fin])
+```
+6. Architecture global
+
+```mermaid
 graph LR
     subgraph "Vue (Affichage)"
         V[CatalogueVue]
@@ -160,7 +174,7 @@ graph LR
     C --> M
     C --> V
     M --- ML
-````
+```
 ## Documentation Technique (Javadoc)
 La documentation détaillée des classes et méthodes a été générée.
 Pour la consulter :

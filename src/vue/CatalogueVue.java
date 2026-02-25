@@ -3,7 +3,8 @@ package vue;
 import modele.Produit;
 import modele.Vin;
 import modele.Spiritueux;
-
+import modele.Panier;
+import modele.ArticlePanier;
 /**
  * Gère l'affichage des données du catalogue sur la console.
  */
@@ -78,5 +79,56 @@ public class CatalogueVue {
             System.out.println("Information : Aucun produit ne correspond au domaine '" + terme + "'.");
         }
         System.out.println("========================================================\n");
+    }
+
+    /**
+     * Génère le ticket de caisse final.
+     * @param panier Le panier contenant les articles.
+     * @param remiseFidHT Le montant de la remise fidélité appliquée en euros HT.
+     */
+
+    public void genererTicket(Panier panier, float remiseFidHT) {
+        // Logo
+        System.out.println("                      __");
+        System.out.println("                    <(o )___");
+        System.out.println("                    ( ._> /");
+        System.out.println("                     `---'");
+
+        System.out.println("\n********************************************************");
+        System.out.println("                TICKET DE CAISSE ");
+        System.out.println("********************************************************");
+
+        float totalHT = 0;
+
+        for (ArticlePanier art : panier.getArticles()) {
+            Produit p = art.getProduit();
+            float prixBrutHT = p.getPrix() * art.getQuantite();
+            float remiseArtHT = art.getRemiseAppliquee();
+            float sousTotalHT = prixBrutHT - remiseArtHT; // CORRECTION : On soustrait ici
+
+            System.out.println("PRODUIT  : " + p.getDomaine() + " [" + p.getNom() + "]");
+            System.out.println("QUANTITE : " + art.getQuantite());
+            System.out.printf("PRIX BRUT: %.2f EUR HT %n", prixBrutHT);
+
+            if (remiseArtHT > 0) {
+                System.out.printf("REMISE   : -%.2f EUR HT %n", remiseArtHT);
+            }
+
+            System.out.printf("SOUS-TOTAL: %.2f EUR HT %n", sousTotalHT);
+            System.out.println("--------------------------------------------------------");
+            totalHT += sousTotalHT;
+        }
+
+        // Calcul final avec TVA
+        float totalApresFidHT = totalHT - remiseFidHT;
+        float montantTVA = totalApresFidHT * 0.20f;
+        float totalTTC = totalApresFidHT + montantTVA;
+
+        System.out.printf("TOTAL GENERAL HT : %.2f EUR %n", totalHT);
+        if(remiseFidHT > 0) System.out.printf("REMISE FIDELITE : -%.2f EUR HT %n", remiseFidHT);
+        System.out.printf("MONTANT TVA (20%%): %.2f EUR %n", montantTVA);
+        System.out.printf("TOTAL A PAYER TTC: %.2f EUR %n", totalTTC);
+        System.out.println("POINTS FIDELITE GAGNES : " + (int)totalHT);
+        System.out.println("********************************************************\n");
     }
 }
